@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'add_page.dart';
+import 'home_page.dart';
+import 'profil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,34 +12,30 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: _title, home: MySatefulWidget());
+    return MaterialApp(title: _title, home: TabsPage());
   }
 }
 
-class MySatefulWidget extends StatefulWidget {
-  MySatefulWidget({Key? key}) : super(key: key);
+class TabsPage extends StatefulWidget {
+  TabsPage({Key? key}) : super(key: key);
 
   @override
-  State<MySatefulWidget> createState() => _MySatefulWidgetState();
+  State<TabsPage> createState() => _TabsPageState();
 }
 
-class _MySatefulWidgetState extends State<MySatefulWidget> {
+class _TabsPageState extends State<TabsPage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0 : Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1 : Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2 : School',
-      style: optionStyle,
-    ),
+
+  final List<Widget> _widgetOptions = [
+    HomePage(),
+    AddPage(),
+    ProfilPage(),
+  ];
+
+  static const List<String> _widgetTitre = <String>[
+    'Accueil',
+    'Ajouter un post',
+    'Profil',
   ];
 
   void _onItemTapped(int index) {
@@ -49,7 +48,7 @@ class _MySatefulWidgetState extends State<MySatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: Text(_widgetTitre.elementAt(_selectedIndex)),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -70,7 +69,7 @@ class _MySatefulWidgetState extends State<MySatefulWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber.shade800,
+        selectedItemColor: Colors.amber.shade700,
         onTap: _onItemTapped,
       ),
     );
