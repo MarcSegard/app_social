@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           post1,
+          post1,
         ],
       ),
     );
